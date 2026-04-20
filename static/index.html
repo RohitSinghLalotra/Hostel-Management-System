@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Hostel Management E2E</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div class="app-container">
+        <header class="glass-header">
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>Nexus HMS</h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-target="dashboard-view">Dashboard</button>
+                <button class="nav-btn" data-target="rooms-view">Rooms</button>
+                <button class="nav-btn" data-target="students-view">Students</button>
+                <button class="nav-btn" data-target="bookings-view">Bookings</button>
+                <button class="nav-btn" data-target="notices-view">Notices</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Dashboard View -->
+            <section id="dashboard-view" class="view active-view">
+                <div class="hero-section glass-panel">
+                    <h2>Welcome to Nexus Management</h2>
+                    <p>Elevate your hostel administration with intelligent insights and dynamic operations.</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card glass-panel">
+                        <h3>Total Rooms</h3>
+                        <p id="stat-total-rooms" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card glass-panel">
+                        <h3>Total Students</h3>
+                        <p id="stat-total-students" class="stat-number">0</p>
+                    </div>
+                    <div class="stat-card glass-panel highlight">
+                        <h3>Available Capacity</h3>
+                        <p id="stat-available-capacity" class="stat-number">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rooms View -->
+            <section id="rooms-view" class="view">
+                <div class="section-header">
+                    <h2>Room Management</h2>
+                    <button class="action-btn" id="open-room-modal">+ Add Room</button>
+                </div>
+                <div class="grid-layout" id="rooms-list">
+                    <!-- Room cards dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Students View -->
+            <section id="students-view" class="view">
+                <div class="section-header">
+                    <h2>Student Registry</h2>
+                    <button class="action-btn" id="open-student-modal">+ Add Student</button>
+                </div>
+                <div class="list-layout" id="students-list">
+                    <!-- Student list items dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Bookings View -->
+            <section id="bookings-view" class="view">
+                <div class="section-header">
+                    <h2>Pending Bookings</h2>
+                </div>
+                <div class="list-layout" id="bookings-list">
+                    <!-- Booking list items dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Notices View -->
+            <section id="notices-view" class="view">
+                <div class="section-header">
+                    <h2>Notice Management</h2>
+                </div>
+                
+                <div class="glass-panel" style="margin-bottom: 2rem;">
+                    <h3>Publish New Notice</h3>
+                    <form id="notice-form" style="margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label for="notice-title">Title</label>
+                            <input type="text" id="notice-title" required placeholder="Announcement Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="notice-content">Content</label>
+                            <textarea id="notice-content" required placeholder="Details about the announcement..." rows="4" style="width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; padding: 0.8rem; font-family: inherit;"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn border-glow">Publish Notice</button>
+                    </form>
+                </div>
+
+                <div class="section-header">
+                    <h3>Recent Notices</h3>
+                </div>
+                <div class="list-layout" id="admin-notices-list">
+                    <!-- Notice list items dynamically inserted here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Room Modal -->
+    <div id="room-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-btn">&times;</span>
+            <h2>Create New Room</h2>
+            <form id="room-form">
+                <div class="form-group">
+                    <label for="room-number">Room Number</label>
+                    <input type="text" id="room-number" required placeholder="e.g. A101">
+                </div>
+                <div class="form-group">
+                    <label for="room-capacity">Capacity</label>
+                    <input type="number" id="room-capacity" required min="1" max="10" value="2">
+                </div>
+                <div class="form-group">
+                    <label for="room-price">Price / Month</label>
+                    <input type="number" id="room-price" required min="0" value="100">
+                </div>
+                <button type="submit" class="submit-btn border-glow">Create Room</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div id="student-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-btn">&times;</span>
+            <h2>Register Student</h2>
+            <form id="student-form">
+                <div class="form-group">
+                    <label for="student-name">Full Name</label>
+                    <input type="text" id="student-name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="student-email">Email Address</label>
+                    <input type="email" id="student-email" required placeholder="john@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="student-room">Assign Room (Ops)</label>
+                    <select id="student-room">
+                        <option value="">-- No Room Assigned --</option>
+                        <!-- Options dynamically populated -->
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn border-glow">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

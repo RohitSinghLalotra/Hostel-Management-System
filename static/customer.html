@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus HMS - Rooms & Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .price-tag {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #00d2ff;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-overlay"></div>
+
+    <div class="app-container portal-container">
+        
+        <header class="glass-header">
+            <div class="logo">
+                <span class="logo-icon">✨</span>
+                <h1>Nexus Stays</h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-target="browse-view">Browse Rooms</button>
+                <button class="nav-btn" data-target="login-view">Check Status</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Public Browse View -->
+            <section id="browse-view" class="view active-view">
+                <div class="section-header">
+                    <h2>Available Rooms</h2>
+                </div>
+                
+                <!-- Notice Board placeholder -->
+                <div id="public-notice-board" style="margin-bottom: 2rem;"></div>
+
+                <div class="grid-layout" id="public-rooms-list">
+                    <!-- Injected by customer.js -->
+                </div>
+            </section>
+
+            <!-- Login View -->
+            <section id="login-view" class="view" style="max-width: 400px; margin: 5vh auto;">
+                <div class="glass-panel" style="text-align: center;">
+                    <div class="logo" style="justify-content: center; margin-bottom: 2rem;">
+                        <span class="logo-icon">🔒</span>
+                        <h2>Student Portal</h2>
+                    </div>
+                    <form id="login-form">
+                        <div class="form-group" style="text-align: left;">
+                            <label for="login-email">Student Email Address</label>
+                            <input type="email" id="login-email" required placeholder="john@example.com">
+                        </div>
+                        <button type="submit" class="submit-btn border-glow">Access Dashboard</button>
+                    </form>
+                    <div id="login-error" style="color: #ff6b6b; margin-top: 1rem; font-size: 0.9rem; display: none;"></div>
+                </div>
+            </section>
+
+            <!-- Portal Dashboard View -->
+            <section id="portal-view" class="view">
+                <div class="section-header">
+                    <h2>Your Dashboard</h2>
+                </div>
+                <div class="hero-section glass-panel" style="text-align: left;">
+                    <h2 id="portal-student-name">Welcome back, Student</h2>
+                    <p style="color: var(--text-muted);" id="portal-student-email">student@example.com</p>
+                </div>
+
+                <!-- Notice Board placeholder -->
+                <div id="portal-notice-board" style="margin-top: 1.5rem;"></div>
+                
+                <div class="grid-layout">
+                    <div class="card" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--text-muted);">Current Lodging</h3>
+                        <div id="portal-room-display">
+                            <!-- Injected by customer.js -->
+                        </div>
+                    </div>
+                    <div class="card" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--text-muted);">Your Roommates</h3>
+                        <div class="list-layout" id="portal-roommates-list">
+                            <!-- Injected by customer.js -->
+                        </div>
+                    </div>
+                    <div class="card" style="padding: 2rem;">
+                        <h3 style="margin-bottom: 1rem; color: var(--text-muted);">Your Bookings</h3>
+                        <div class="list-layout" id="portal-bookings-list">
+                            <!-- Injected by customer.js -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-btn" id="close-booking">&times;</span>
+            <h2>Book Room <span id="booking-room-label"></span></h2>
+            <form id="booking-form">
+                <input type="hidden" id="booking-room-id">
+                <div class="form-group">
+                    <label for="booking-name">Full Name</label>
+                    <input type="text" id="booking-name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="booking-email">Email Address</label>
+                    <input type="email" id="booking-email" required placeholder="john@example.com">
+                </div>
+                <button type="submit" class="submit-btn border-glow">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/customer.js"></script>
+</body>
+</html>
