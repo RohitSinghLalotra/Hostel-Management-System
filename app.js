@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupModal('open-student-modal', 'student-modal', 'student-form');
 
     // ==== API Integration ====
-    const API_BASE = '/api';
+    const API_BASE = 'api';
 
     async function fetchDashboardStats() {
         try {

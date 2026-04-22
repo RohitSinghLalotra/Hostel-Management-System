@@ -139,11 +139,11 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 def read_index():
-    return FileResponse("static/index.html")
+    return FileResponse("index.html")
 
 @app.get("/customer")
 def read_customer():
-    return FileResponse("static/customer.html")
+    return FileResponse("customer.html")
 
 @app.get("/api/student-portal/{email}", response_model=StudentPortalResponse)
 def get_student_portal(email: str, db: Session = Depends(get_db)):

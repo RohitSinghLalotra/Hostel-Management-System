@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==== Browse Rooms Logic ====
     async function fetchPublicRooms() {
         try {
-            const res = await fetch('/api/rooms'); // Getting all rooms 
+            const res = await fetch('api/rooms'); // Getting all rooms 
             const rooms = await res.json();
             
             const container = document.getElementById('public-rooms-list');
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = document.getElementById('booking-email').value;
 
         try {
-            const res = await fetch('/api/bookings', {
+            const res = await fetch('api/bookings', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ student_name: name, student_email: email, room_id })
